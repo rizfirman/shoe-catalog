@@ -2,7 +2,7 @@
   <div>
     <HomeParallaxContainer />
     <section class="about">
-      <HomeImageGallery />
+      <HomeProductGallery />
       <HomeAbout />
     </section>
   </div>

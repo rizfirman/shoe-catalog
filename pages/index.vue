@@ -8,6 +8,6 @@ const router = useRouter();
 onMounted(() => {
   setTimeout(() => {
     router.push("/home");
-  }, 3000); // 3000 ms = 3 detik
+  }, 2000); // 3000 ms = 3 detik
 });
 </script>
