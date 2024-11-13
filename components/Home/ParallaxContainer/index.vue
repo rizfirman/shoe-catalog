@@ -1,15 +1,17 @@
 <template>
   <div class="parallax">
     <div class="parallax__container">
-      <NuxtImg
+      <!-- Gambar background parallax -->
+      <img
         src="https://res.cloudinary.com/rizfirman/image/upload/v1731514948/hoka.jpg"
         alt="parallax"
         class="parallax__background"
-        placeholder="blur"
         width="1920"
         height="1080"
       />
-      <NuxtImg
+
+      <!-- Logo dengan animasi scroll -->
+      <img
         src="https://res.cloudinary.com/rizfirman/image/upload/v1731514941/hoka-seeklogo.png"
         id="logo"
         alt="Logo"
@@ -21,6 +23,8 @@
 </template>
 
 <script setup lang="ts">
+import { ref, onMounted, onUnmounted } from "vue";
+
 const logo = ref<HTMLElement | null>(null);
 
 const handleScroll = () => {
