@@ -1,54 +1,34 @@
 <template>
   <div>
-    <div class="catalog-page">
-      <p class="catalog-page__header">Catalog</p>
+    <div class="favorites-page">
+      <p class="favorites-page__header">Favorites</p>
 
       <BaseSearch v-model:search-query="searchQuery" />
       <BaseSort v-model:sort-option="sortOption" />
 
       <BaseEmptyState
-        v-if="productStore.products.length === 0 && !productStore.isLoading"
-        message="No products available at the moment."
+        v-if="favoriteStore.favorites.length === 0"
+        message="You have no favorite products yet."
       />
 
       <BaseEmptyState
-        v-else-if="sortedAndFilteredProducts.length === 0 && searchQueryActive"
+        v-else-if="sortedAndFilteredFavorites.length === 0 && searchQueryActive"
         :search-query="searchQuery"
+        message="No favorite products found for your search."
       />
 
-      <div
-        v-else-if="
-          sortedAndFilteredProducts.length === 0 &&
-          !searchQueryActive &&
-          productStore.isLoading
-        "
-        class="catalog-page__gallery"
-      >
+      <div v-else class="favorites-page__gallery">
         <div
-          v-for="(_, index) in Array.from({ length: itemsPerPage })"
+          v-for="(product, index) in paginatedFavorites"
           :key="`${index}-${currentPage}`"
         >
-          <div class="catalog-page__skeleton-card">
-            <BaseProductCardSkeleton />
-          </div>
-        </div>
-      </div>
-
-      <div v-else class="catalog-page__gallery">
-        <div
-          v-for="(product, index) in paginatedProducts"
-          :key="`${index}-${currentPage}`"
-        >
-          <BaseProductCard
-            :products="product"
-            :is-loading="productStore.isLoading"
-          />
+          <BaseProductCard :products="product" :is-loading="false" />
         </div>
       </div>
 
       <div
-        v-if="sortedAndFilteredProducts.length > 0"
-        class="catalog-page__footer"
+        v-if="sortedAndFilteredFavorites.length > 0"
+        class="favorites-page__footer"
       >
         <BasePagination
           :total-pages="totalPages"
@@ -64,8 +44,7 @@
   definePageMeta({
     layout: 'main-layout',
   })
-
-  const productStore = useProductStore()
+  const favoriteStore = useFavoriteStore()
 
   const itemsPerPage = 8
   const currentPage = ref(1)
@@ -74,40 +53,38 @@
   const sortOption = ref('lowest')
 
   watch(searchQuery, (val) => {
-    if (val) {
-      searchQueryActive.value = true
-    }
+    searchQueryActive.value = !!val
   })
 
-  const filteredProducts = computed(() => {
-    if (!searchQuery.value) return productStore.products
-    return productStore.products.filter((product) =>
+  const filteredFavorites = computed(() => {
+    if (!searchQuery.value) return favoriteStore.favorites
+    return favoriteStore.favorites.filter((product) =>
       product.name.toLowerCase().includes(searchQuery.value.toLowerCase()),
     )
   })
 
-  const sortedAndFilteredProducts = computed(() => {
-    const products = [...filteredProducts.value]
+  const sortedAndFilteredFavorites = computed(() => {
+    const favorites = [...filteredFavorites.value]
     if (sortOption.value === 'lowest') {
-      products.sort((a, b) => a.price - b.price)
+      favorites.sort((a, b) => a.price - b.price)
     } else if (sortOption.value === 'highest') {
-      products.sort((a, b) => b.price - a.price)
+      favorites.sort((a, b) => b.price - a.price)
     }
-    return products
+    return favorites
   })
 
   const totalPages = computed(() =>
-    Math.ceil(sortedAndFilteredProducts.value.length / itemsPerPage),
+    Math.ceil(sortedAndFilteredFavorites.value.length / itemsPerPage),
   )
 
-  const paginatedProducts = computed(() => {
+  const paginatedFavorites = computed(() => {
     const start = (currentPage.value - 1) * itemsPerPage
     const end = start + itemsPerPage
-    return sortedAndFilteredProducts.value.slice(start, end)
+    return sortedAndFilteredFavorites.value.slice(start, end)
   })
 
   onMounted(() => {
-    productStore.loadProductList()
+    favoriteStore.loadFavoritesFromCookie()
   })
 
   const setCurrentPage = (page: number) => {
@@ -116,20 +93,13 @@
 </script>
 
 <style lang="scss" scoped>
-  .catalog-page {
+  .favorites-page {
     margin-bottom: 50px;
 
     &__header {
       font-size: 2rem;
       text-align: center;
       margin-top: 5rem;
-    }
-
-    &__skeleton-card {
-      border: white 1px solid;
-      border-radius: 1rem;
-      padding: 20px;
-      transition: transform 0.2s ease;
     }
 
     &__gallery {

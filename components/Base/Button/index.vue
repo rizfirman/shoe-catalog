@@ -3,28 +3,28 @@
 </template>
 
 <script setup lang="ts">
-const emit = defineEmits(["click"]);
+  const emit = defineEmits(['click'])
 
-const props = defineProps({
-  label: {
-    type: String,
-    default: "",
-  },
-});
+  const props = defineProps({
+    label: {
+      type: String,
+      default: '',
+    },
+  })
 </script>
 
 <style lang="scss" scoped>
-.btn {
-  font-size: 1rem;
-  font-weight: 600;
-  outline: none;
-  border: none;
-  padding: 0.75rem 1rem;
-  border-radius: 5px;
-  transition: background-color 0.3s;
-  cursor: pointer;
-  &:hover {
-    background-color: #ff9800;
+  .btn {
+    font-size: 1rem;
+    font-weight: 600;
+    outline: none;
+    border: none;
+    padding: 0.75rem 1rem;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    cursor: pointer;
+    &:hover {
+      background-color: #ff9800;
+    }
   }
-}
 </style>

@@ -1,7 +1,6 @@
 <template>
   <div class="parallax">
     <div class="parallax__container">
-      <!-- Gambar background parallax -->
       <img
         src="https://res.cloudinary.com/rizfirman/image/upload/v1731514948/hoka.jpg"
         alt="parallax"
@@ -10,10 +9,9 @@
         height="1080"
       />
 
-      <!-- Logo dengan animasi scroll -->
       <img
-        src="https://res.cloudinary.com/rizfirman/image/upload/v1731514941/hoka-seeklogo.png"
         id="logo"
+        src="https://res.cloudinary.com/rizfirman/image/upload/v1731514941/hoka-seeklogo.png"
         alt="Logo"
         width="500"
         height="300"
@@ -23,59 +21,57 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from "vue";
+  const logo = ref<HTMLElement | null>(null)
 
-const logo = ref<HTMLElement | null>(null);
+  const handleScroll = () => {
+    const positionY = window.scrollY
 
-const handleScroll = () => {
-  const positionY = window.scrollY;
+    if (logo.value) {
+      const initialScale = 0.5
+      const maxScale = 1.5
+      const scaleValue = Math.min(initialScale + positionY * 0.001, maxScale)
 
-  if (logo.value) {
-    const initialScale = 0.5;
-    const maxScale = 1.5;
-    const scaleValue = Math.min(initialScale + positionY * 0.001, maxScale);
-
-    logo.value.style.transform = `translate(-50%, -50%) scale(${scaleValue})`;
+      logo.value.style.transform = `translate(-50%, -50%) scale(${scaleValue})`
+    }
   }
-};
 
-onMounted(() => {
-  logo.value = document.getElementById("logo");
-  window.addEventListener("scroll", handleScroll);
-});
+  onMounted(() => {
+    logo.value = document.getElementById('logo')
+    window.addEventListener('scroll', handleScroll)
+  })
 
-onUnmounted(() => {
-  window.removeEventListener("scroll", handleScroll);
-});
+  onUnmounted(() => {
+    window.removeEventListener('scroll', handleScroll)
+  })
 </script>
 
 <style lang="scss" scoped>
-.parallax {
-  position: relative;
-}
+  .parallax {
+    position: relative;
+  }
 
-.parallax__container {
-  height: 100vh;
-  position: relative;
-  overflow: hidden;
-  background-color: #000000;
-}
+  .parallax__container {
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+    background-color: #000000;
+  }
 
-.parallax__background {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
+  .parallax__background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 
-#logo {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0.5);
-  max-width: 90vw;
-  max-height: 40vh;
-}
+  #logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.5);
+    max-width: 90vw;
+    max-height: 40vh;
+  }
 </style>

@@ -1,24 +1,24 @@
 <template>
   <div>
     <HomeParallaxContainer />
-    <section class="about">
+    <div class="content">
       <HomeProductGallery />
       <HomeAbout />
-    </section>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-definePageMeta({
-  layout: "main-layout",
-});
+  definePageMeta({
+    layout: 'main-layout',
+  })
 </script>
 
 <style lang="scss" scoped>
-.about {
-  min-height: 125vh;
-  background-color: #000000;
-  display: grid;
-  place-content: center;
-}
+  .content {
+    min-height: 125vh;
+    background-color: #000000;
+    display: grid;
+    place-content: center;
+  }
 </style>
