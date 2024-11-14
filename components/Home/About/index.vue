@@ -13,28 +13,36 @@
       </p>
     </div>
     <div class="footer__btn">
-      <BaseButton label="Learn More" />
+      <BaseButton label="Learn More" @click="goToTheAboutPage()" />
     </div>
   </div>
 </template>
 
-<style lang="scss" scoped>
-.details {
-  max-width: 800px;
-  margin: auto;
-  margin-top: 5rem;
-  font-size: 1.2rem;
-  line-height: 2rem;
-  text-align: center;
-  &__header {
-    font-size: 2rem;
-    margin-bottom: 2rem;
-  }
-}
+<script setup lang="ts">
+  const router = useRouter()
 
-.footer__btn {
-  max-width: 800px;
-  margin: 2rem auto;
-  text-align: center;
-}
+  const goToTheAboutPage = () => {
+    router.push('/about')
+  }
+</script>
+
+<style lang="scss" scoped>
+  .details {
+    max-width: 800px;
+    margin: auto;
+    margin-top: 5rem;
+    font-size: 1.2rem;
+    line-height: 2rem;
+    text-align: center;
+    &__header {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+    }
+  }
+
+  .footer__btn {
+    max-width: 800px;
+    margin: 2rem auto;
+    text-align: center;
+  }
 </style>
