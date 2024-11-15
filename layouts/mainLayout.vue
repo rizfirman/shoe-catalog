@@ -82,18 +82,18 @@
     }
 
     .nav-link {
-      color: #ffffff;
+      color: vars.$primary-color;
       text-decoration: none;
       font-size: 1.2rem;
       transition: color 0.3s;
 
       &:hover {
-        color: #ff9800;
+        color: vars.$secondary-color;
       }
 
       &.active-link,
       &.exact-active-link {
-        color: #ff9800;
+        color: vars.$secondary-color;
         font-weight: bold;
       }
     }
@@ -103,12 +103,12 @@
       font-size: 1.5rem;
       background: none;
       border: none;
-      color: #ffffff;
+      color: vars.$primary-color;
       cursor: pointer;
       transition: color 0.3s;
 
       &:hover {
-        color: #ff9800;
+        color: vars.$secondary-color;
       }
 
       @media (max-width: 768px) {

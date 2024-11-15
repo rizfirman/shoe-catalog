@@ -24,7 +24,7 @@
     transition: background-color 0.3s;
     cursor: pointer;
     &:hover {
-      background-color: #ff9800;
+      background-color: vars.$secondary-color;
     }
   }
 </style>

@@ -60,8 +60,6 @@
 </script>
 
 <style lang="scss" scoped>
-  @use '@/assets/scss/variables';
-
   .product__card {
     border: white 1px solid;
     border-radius: 1rem;
@@ -114,7 +112,7 @@
         fill 0.3s ease;
 
       &.active {
-        fill: #ff9800;
+        fill: vars.$secondary-color;
         transform: scale(1.2);
         animation: heartbeat 0.6s ease;
       }

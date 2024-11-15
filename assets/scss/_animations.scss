@@ -24,3 +24,12 @@
       transform: rotate(0deg);
     }
   }
+
+  @keyframes loading {
+    from {
+      transform: rotate(0turn);
+    }
+    to {
+      transform: rotate(1turn);
+    }
+  }

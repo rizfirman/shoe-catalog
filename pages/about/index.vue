@@ -157,13 +157,13 @@
       padding: 0;
 
       a {
-        color: white;
+        color: vars.$primary-color;
         text-decoration: none;
         font-weight: bold;
         transition: color 0.3s;
 
         &:hover {
-          color: #ff9800;
+          color: vars.$secondary-color;
         }
       }
 

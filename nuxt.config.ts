@@ -4,4 +4,13 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   css: ['@/assets/scss/global.scss'],
   modules: ['@pinia/nuxt', '@nuxt/eslint'],
+  vite: {
+    css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData: `@use "@/assets/scss/variables" as vars;`,
+        },
+      },
+    },
+  },
 })
