@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div class="favorites-page">
-      <p class="favorites-page__header">Favorites</p>
+    <div class="catalog-page">
+      <p class="catalog-page__header">Favorites</p>
 
       <BaseSearch v-model:search-query="searchQuery" />
       <BaseSort v-model:sort-option="sortOption" />
@@ -17,7 +17,7 @@
         message="No favorite products found for your search."
       />
 
-      <div v-else class="favorites-page__gallery">
+      <div v-else class="catalog-page__gallery">
         <div
           v-for="(product, index) in paginatedFavorites"
           :key="`${index}-${currentPage}`"
@@ -28,7 +28,7 @@
 
       <div
         v-if="sortedAndFilteredFavorites.length > 0"
-        class="favorites-page__footer"
+        class="catalog-page__footer"
       >
         <BasePagination
           :total-pages="totalPages"
@@ -91,46 +91,3 @@
     currentPage.value = page
   }
 </script>
-
-<style lang="scss" scoped>
-  .favorites-page {
-    margin-bottom: 50px;
-
-    &__header {
-      font-size: 2rem;
-      text-align: center;
-      margin-top: 5rem;
-    }
-
-    &__gallery {
-      max-width: 1200px;
-      margin: auto;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 3rem;
-      padding: 20px;
-
-      @media (max-width: 1024px) {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 2rem;
-      }
-
-      @media (max-width: 768px) {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1.5rem;
-      }
-
-      @media (max-width: 480px) {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-      }
-    }
-
-    &__footer {
-      max-width: 1200px;
-      margin: auto;
-      margin-top: 2rem;
-      text-align: center;
-    }
-  }
-</style>

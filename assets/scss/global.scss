@@ -1,7 +1,17 @@
+@use 'variables' as *;
+@use 'mixins' as mixins;
+
+@include mixins.catalog-page;
+
+
+
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;900&display=swap");
 
+
+
+
 html, body {
-    background-color: black;
+  background-color: black;
 }
 
 * {
@@ -16,8 +26,8 @@ img {
 }
 
 body {
-  font-family: "Poppins", sans-serif;
-  color: #ffffff;
+  font-family: $font-family;
+  color: $primary-color;
 }
 
 
